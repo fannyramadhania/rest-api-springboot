@@ -25,6 +25,16 @@ public class UserService {
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
-         
+
+    }
+    
+    public User updateUser(Long id,User entity) {
+        User existingUser = userRepository.findById(id).orElse(null);
+        existingUser.setName(entity.getName());
+        existingUser.setEmail(entity.getEmail());
+        existingUser.setAge(entity.getAge());
+      return  userRepository.save(existingUser);
+       
+
     }
 }

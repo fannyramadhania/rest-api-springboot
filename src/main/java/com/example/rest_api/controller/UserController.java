@@ -15,6 +15,8 @@ import com.example.rest_api.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -54,5 +56,18 @@ public class UserController {
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(e.getMessage());
         }
+    }
+
+    @DeleteMapping ("/user/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "Success";
+    }
+
+
+    @PutMapping("/user/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User entity) {
+      return   userService.updateUser(id, entity);
+     
     }
 }
